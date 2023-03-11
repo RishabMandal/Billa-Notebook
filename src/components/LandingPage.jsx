@@ -10,6 +10,7 @@ import {
   updateDoc,
   doc,
 } from "firebase/firestore";
+import { NavLink } from "react-router-dom";
 
 const LandingPage = () => {
   const inputRef = useRef();
@@ -20,7 +21,6 @@ const LandingPage = () => {
     const getNotes = async () => {
       try {
         const data = await getDocs(collection(db, "notes"));
-        // console.log(data);
         console.log(data.docs.map((doc) => doc.data()));
         setTextNotes(data.docs.map((doc) => doc.data()));
         // inputRef.current.value = data.docs.map(
@@ -44,6 +44,7 @@ const LandingPage = () => {
       notepad: textareaNotes,
     })
       .then((docRef) => {
+        alert("Uploaded successfully!");
         console.log(
           "A New Document Field has been added to an existing document"
         );
@@ -56,6 +57,10 @@ const LandingPage = () => {
   useEffect(() => {
     if (textNotes) inputRef.current.value = textNotes[0].notepad;
   }, [textNotes]);
+
+  useEffect(() => {
+    submitNotes();
+  }, [textareaNotes]);
 
   const [fontsize, setFontsize] = useState("xl");
 
@@ -86,7 +91,10 @@ const LandingPage = () => {
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
-                onClick={() => setFontsize("text-lg")}
+                onClick={() => {
+                  navigator.vibrate(150);
+                  setFontsize("text-lg");
+                }}
                 stroke="currentColor"
                 className="w-6 h-6 hover:scale-75 transition ease-in"
               >
@@ -97,14 +105,17 @@ const LandingPage = () => {
                 />
               </svg>
             </button>
-            <div>Zoom</div>
+            <div className="font-semibold">Zoom</div>
             <button>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
-                onClick={() => setFontsize("text-3xl")}
+                onClick={() => {
+                  navigator.vibrate(150);
+                  setFontsize("text-3xl");
+                }}
                 stroke="currentColor"
                 className="w-6 h-6 hover:scale-125 transition ease-in"
               >
@@ -118,27 +129,34 @@ const LandingPage = () => {
           </div>
           <div
             onClick={() => alert("Coming soon....")}
-            className="bg-white mt-5 text-black rounded-full font-bold border-2 border-gray-800 hover:border-white hover:bg-black hover:text-white transition ease-in px-4 py-3 text-xl cursor-pointer"
+            className="bg-white my-5 text-black rounded-full font-bold border-2 border-gray-800 hover:border-white hover:bg-black hover:text-white transition ease-in px-4 py-3 text-xl cursor-pointer"
           >
             View uploaded files
           </div>
-          <div
-            onClick={() => alert("Coming soon....")}
-            className="bg-white mt-5 text-black rounded-full font-bold border-2 border-gray-800 hover:border-white hover:bg-black hover:text-white transition ease-in px-4 py-3 text-xl cursor-pointer"
+          <NavLink
+            to="/fileUpload"
+            className="bg-white block text-black rounded-full font-bold border-2 border-gray-800 hover:border-white hover:bg-black hover:text-white transition ease-in px-4 py-3 text-xl cursor-pointer"
           >
             View uploaded images
-          </div>
-          {/* <div onClick={() => setTextNotes(inputRef.current.value)}>Upload</div> */}
-          <div onClick={() => setTextareaNotes(inputRef.current.value)}>
-            Upload
-          </div>
+          </NavLink>
           <div
-            onClick={() => {
-              submitNotes();
-            }}
             className="bg-white mt-5 text-black rounded-full font-bold border-2 border-gray-800 hover:border-white hover:bg-black hover:text-white transition ease-in px-4 py-3 text-xl cursor-pointer"
+            onClick={() => {
+              navigator.vibrate(150);
+              setTextareaNotes(inputRef.current.value);
+            }}
           >
             Upload this note
+          </div>
+          <div
+            className="bg-white mt-5 text-black rounded-full font-bold border-2 border-gray-800 hover:border-white hover:bg-black hover:text-white transition ease-in px-4 py-3 text-xl cursor-pointer"
+            onClick={() => {
+              navigator.vibrate(150);
+              navigator.clipboard.writeText(inputRef.current.value);
+              alert("Clipboard has been updated");
+            }}
+          >
+            Copy this note
           </div>
         </div>
       </div>
