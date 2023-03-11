@@ -15,7 +15,7 @@ const LandingPage = () => {
   const inputRef = useRef();
   const [textNotes, setTextNotes] = useState();
   const [textareaNotes, setTextareaNotes] = useState();
-  
+
   useEffect(() => {
     const getNotes = async () => {
       try {
@@ -60,14 +60,14 @@ const LandingPage = () => {
   const [fontsize, setFontsize] = useState("xl");
 
   return (
-    <div className="bg-black min-h-screen w-full text-white p-3 md:p-10">
-      <div className="text-5xl md:mb-10 font-semibold font-serif flex flex-wrap justify-between">
+    <div className="bg-black min-h-screen w-full text-white p-3 py-10 md:p-10">
+      <div className="text-5xl mb-10 font-semibold font-serif flex flex-wrap justify-between">
         <div className="w-fit">Experience the Best Notebook</div>
         <div className="w-fit">- PowerBilla</div>
       </div>
       <div className="flex flex-wrap">
         <textarea
-          className={`bg-black border-2 ${fontsize} p-1 md:p-10 md:w-[70vw] rounded-xl`}
+          className={`bg-black border-2 ${fontsize} p-3 mb-8 md:p-10 w-full md:w-[70vw] rounded-xl`}
           ref={inputRef}
           name=""
           id=""
