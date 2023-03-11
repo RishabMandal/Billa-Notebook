@@ -15,6 +15,7 @@ const LandingPage = () => {
   const inputRef = useRef();
   const [textNotes, setTextNotes] = useState();
   const [textareaNotes, setTextareaNotes] = useState();
+  
   useEffect(() => {
     const getNotes = async () => {
       try {
