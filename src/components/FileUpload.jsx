@@ -12,6 +12,7 @@ import {
   list,
 } from "firebase/storage";
 import { v4 } from "uuid";
+import { motion } from "framer-motion";
 
 const FileUpload = () => {
   const [imageUpload, setImageUpload] = useState(null);
@@ -39,14 +40,33 @@ const FileUpload = () => {
     });
   }, []);
 
+  const variants = {
+    hidden: {
+      opacity: 0,
+      y: -10,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.3,
+      },
+    },
+  };
+
   return (
     <div className="bg-black min-h-screen w-full text-white p-3 py-10 md:p-10">
       <div className="md:flex md:flex-wrap">
         <div className="w-fit mx-auto">
-          <div className="text-5xl mb-10 font-semibold font-serif">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={variants}
+            className="text-5xl mb-10 font-semibold font-serif"
+          >
             Preview Files here
-          </div>
-          <div>
+          </motion.div>
+          <motion.div initial="hidden" animate="visible" variants={variants}>
             {imageUrls?.map((url) => {
               return (
                 <img
@@ -56,13 +76,21 @@ const FileUpload = () => {
                 />
               );
             })}
-          </div>
+          </motion.div>
         </div>
         <div className="w-fit mx-auto">
-          <div className="text-5xl my-10 md:mt-0 font-semibold font-serif">
+        <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={variants}
+            className="text-5xl my-10 md:mt-0 font-semibold font-serif"
+          >
             Upload Files here
-          </div>
-          <input
+          </motion.div>
+          <motion.input
+            initial="hidden"
+            animate="visible"
+            variants={variants}
             onChange={(event) => {
               setImageUpload(event.target.files[0]);
             }}
@@ -70,12 +98,15 @@ const FileUpload = () => {
             name=""
             id=""
           />
-          <button
+          <motion.button
+            initial="hidden"
+            animate="visible"
+            variants={variants}
             className="bg-white my-5 text-black rounded-full font-bold border-2 border-gray-800 hover:border-white hover:bg-black hover:text-white transition ease-in px-4 py-2 cursor-pointer"
             onClick={uploadFile}
           >
             Upload file
-          </button>
+          </motion.button>
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ import LandingPage from "./components/LandingPage";
 import FileUpload from "./components/FileUpload";
 import { HashRouter as Router, Route, Routes, NavLink } from "react-router-dom";
 import Settings from "./components/Settings";
+import FilesUpload from "./components/FilesUpload";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
           <Route exact path="/fileUpload" element={<FileUpload />} />
+          <Route exact path="/filesUpload" element={<FilesUpload />} />
           <Route exact path="/settings" element={<Settings />} />
         </Routes>
       </Router>
