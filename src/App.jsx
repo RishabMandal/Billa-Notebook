@@ -1,10 +1,11 @@
 import { useState } from "react";
 import "./App.css";
 import LandingPage from "./components/LandingPage";
-import FileUpload from "./components/FileUpload";
 import { HashRouter as Router, Route, Routes, NavLink } from "react-router-dom";
 import Settings from "./components/Settings";
 import FilesUpload from "./components/FilesUpload";
+import NotFound from "./components/NotFound";
+import ImageUpload from "./components/ImageUpload";
 
 function App() {
   return (
@@ -34,11 +35,31 @@ function App() {
             />
           </svg>
         </NavLink>
+        <NavLink
+          to="/"
+          className="text-white md:block bg-transparent w-fit h-fit fixed hidden md:bottom-10 md:right-24"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="w-6 h-6 md:w-10 md:h-10 cursor-pointer hover:scale-125 duration-200"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
+            />
+          </svg>
+        </NavLink>
         <Routes>
           <Route exact path="/" element={<LandingPage />} />
-          <Route exact path="/fileUpload" element={<FileUpload />} />
+          <Route exact path="/ImageUpload" element={<ImageUpload />} />
           <Route exact path="/filesUpload" element={<FilesUpload />} />
           <Route exact path="/settings" element={<Settings />} />
+          <Route exact path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </div>

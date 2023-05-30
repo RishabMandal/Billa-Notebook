@@ -14,7 +14,7 @@ import {
 import { v4 } from "uuid";
 import { motion } from "framer-motion";
 
-const FileUpload = () => {
+const ImageUpload = () => {
   const [imageUpload, setImageUpload] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
 
@@ -64,7 +64,7 @@ const FileUpload = () => {
             variants={variants}
             className="text-5xl mb-10 font-semibold font-serif"
           >
-            Preview Files here
+            Preview Images here
           </motion.div>
           <motion.div initial="hidden" animate="visible" variants={variants}>
             {imageUrls?.map((url) => {
@@ -79,13 +79,13 @@ const FileUpload = () => {
           </motion.div>
         </div>
         <div className="w-fit mx-auto">
-        <motion.div
+          <motion.div
             initial="hidden"
             animate="visible"
             variants={variants}
             className="text-5xl my-10 md:mt-0 font-semibold font-serif"
           >
-            Upload Files here
+            Upload Images here
           </motion.div>
           <motion.input
             initial="hidden"
@@ -113,4 +113,4 @@ const FileUpload = () => {
   );
 };
 
-export default FileUpload;
+export default ImageUpload;

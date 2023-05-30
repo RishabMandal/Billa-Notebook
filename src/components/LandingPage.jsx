@@ -12,6 +12,7 @@ import {
 } from "firebase/firestore";
 import { NavLink } from "react-router-dom";
 import { motion } from "framer-motion";
+// import Particle from "../Particle";
 
 const LandingPage = () => {
   const inputRef = useRef();
@@ -67,14 +68,25 @@ const LandingPage = () => {
 
   const [fontsize, setFontsize] = useState("xl");
 
+  const animationVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+  };
+
   return (
-    <div className="bg-black min-h-screen w-full text-white p-3 py-10 md:p-10">
+    <motion.div
+      variants={animationVariants}
+      initial="hidden"
+      animate="visible"
+      className="bg-black min-h-screen w-full text-white p-3 py-10 md:p-10"
+    >
       <div className="text-5xl mb-10 font-semibold font-serif flex flex-wrap justify-between">
-        <div className="w-fit">Experience the Best Notebook</div>
+        <div className="w-fit md:mb-5">Experience the Best Notebook</div>
         <div className="w-fit flex flex-row mt-7 md:mt-0 mx-auto md:mx-0">
-          - PowerBilla
+          <div className="w-fit hidden sm:inline-block">-</div>
+          <div className="w-fit ml-3">PowerBilla</div>
           <img
-            className="invert w-fit px-2 h-[3rem]"
+            className="invert w-fit px-2 h-[3rem] hover:rotate-180 duration-200"
             src="https://img.icons8.com/pastel-glyph/64/000000/cat-back-view.png"
             alt=""
           />
@@ -82,7 +94,7 @@ const LandingPage = () => {
       </div>
       <div className="flex flex-wrap">
         <textarea
-          className={`bg-black border-2 ${fontsize} p-3 mb-8 md:p-10 w-full md:w-[70vw] rounded-xl`}
+          className={`bg-black h-[80vh] overflow-hidden hover:overflow-y-scroll md:sticky md:top-10 border-2 ${fontsize} p-3 mb-8 md:p-10 w-full md:w-[70vw] rounded-xl`}
           ref={inputRef}
           name=""
           id=""
@@ -142,6 +154,9 @@ const LandingPage = () => {
           >
             <NavLink to="/filesUpload">View uploaded files</NavLink>
           </motion.div>
+          {/* <Particle /> */}
+
+          {/* // */}
           <motion.div
             initial={{ opacity: 0, x: 200 }}
             animate={{ opacity: 1, x: 0 }}
@@ -152,7 +167,7 @@ const LandingPage = () => {
             }}
             className="bg-white block text-black rounded-full font-bold border-2 border-gray-800 hover:border-white hover:bg-black hover:text-white transition ease-in px-4 py-3 text-xl cursor-pointer"
           >
-            <NavLink to="/fileUpload">View uploaded images</NavLink>
+            <NavLink to="/ImageUpload">View uploaded images</NavLink>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, x: 300 }}
@@ -189,7 +204,7 @@ const LandingPage = () => {
           </motion.div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
